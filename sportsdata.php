@@ -7,11 +7,8 @@ if($_GET[local] > 0)
 	$luye = $_GET[u];
 	$ifr = $_GET[ifr];
 	$lran = $_GET[ran];
-	//	echo" http://localhost/ == ifr:$ifr = uye: $luye  == fid: $lfid == ran: $lran ==> VAR. <br>";
+
 	?>
-	<!--
-		<iframe  width="100%" height="100%" frameborder="0" scrolling="yes" src="http://www.e-sportsdata.com/iframe.php?local=<?=$lfid?>&u=<?=$luye?>&r=<?=$lran?>" frameborder="0"></iframe>	
-		-->
 		<iframe  width="100%" height="100%" frameborder="0" scrolling="yes" src="http://www.e-sportsdata.com/iframe.php?local=<?=$lfid?>&ifr=<?=$ifr?>&u=<?=$luye?>&r=<?=$lran?>" frameborder="0"></iframe>	
 
 	<?php
@@ -61,7 +58,6 @@ if($_GET[local] > 0)
 	
 	if($_GET[fa_gorevli_id] > 0)
 	{
-		// echo" $_GET[fa_gorevli_id],$_GET[fid],$_GET[uye],$_GET[admin],$_GET[fed],$_GET[oda],$_GET[dok],$_GET[tar],$_GET[kur],$_GET[ayr],$_GET[gor],$_GET[pln],$_GET[prg],$_GET[ano],$_GET[yan],$_GET[ort],$_GET[son],$_GET[ring],$_GET[aktif] ";	
 		$fagorevlisql = DB::prepare("SELECT * FROM fa_gorevli WHERE fa_gorevli_id = ? ");
 		$fagorevlisql->execute(array($_GET[fa_gorevli_id]));
 
