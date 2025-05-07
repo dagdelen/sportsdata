@@ -144,7 +144,7 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
         }
         .hkm{border: solid 1px #DDDDDD; width:150px; height:20px; font-size: 0.8em;}
         .yan2{margin-left: 175px;}
-        .orta{margin-left: 175px; margin-top: -40px;}
+        .orta{margin-left: 175px; } /* margin-top: -40px; */ 
         .juri{ display: inline-block;}
 
     </style>
@@ -179,7 +179,7 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
     <!--  
 	<a class="float-end" href="java.php?f=<?=$fid?>&r=<?=$ring_id?>" target="_blank" style="position:absolute; right:10px; top:10px;">
     -->   
-	<a  style="cursor:cell; font-size:1.5em; position:absolute; right:10px; top:10px;" onclick="window.open('ajx.php?f=<?=$fid?>&r=<?=$ring_id?>','skor','height=400,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+	<a  style="cursor:cell; font-size:1.5em; position:absolute; right:10px; top:10px;" onclick="window.open('ajx.php?f=<?=$fid?>&r=<?=$ring_id?>','skor<?=$ring_id?>','height=400,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
 		<i class="md_bi bi bi-display"></i>
 	</a>
     <!-- --> 
