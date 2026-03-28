@@ -43,7 +43,7 @@ if($uye > 0)
 
 
 if(! $dil){$dil="tr";}
-$trdilbak = DB::get('SELECT * FROM dil ORDER BY id DESC ');	
+$trdilbak = DB::get('SELECT * FROM dil ORDER BY dil_id DESC ');	
 foreach($trdilbak as $dill){
 	if($dill->$dil > '0'){
 		define($dill->ad,	$dill->$dil, true);
