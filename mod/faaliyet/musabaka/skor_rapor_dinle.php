@@ -143,20 +143,20 @@ if($modal == 1)
                 $bluepuanlar= $mavi->fetch(PDO::FETCH_ASSOC);
                 $blue_topla = $bluepuanlar[takma_ad];
 
-                if(6 <= $skr->volt){ $pil = '<i class="bi bi-battery-full" style="font-size:1.5em; color:rgb(26, 87, 2);"></i>'; }
-                if($skr->volt == 5){ $pil = '<i class="bi bi-battery-half" style="font-size:1.5em; color:rgb(223, 173, 8);"></i>';  }
-                if($skr->volt < 5){ $pil = '<i class="bi bi-battery" style="font-size:1.5em; color:rgb(189, 4, 4);"></i>';   }
+                if(6 <= $skr->volt){ $pil = '<i class="bi bi-battery-full" style="font-size:1.5em; color:rgb(26, 87, 2);">...</i>'; }
+                if($skr->volt == 5){ $pil = '<i class="bi bi-battery-half" style="font-size:1.5em; color:rgb(223, 173, 8);">..</i>';  }
+                if($skr->volt < 5){ $pil = '<i class="bi bi-battery" style="font-size:1.5em; color:rgb(189, 4, 4);">.</i>';   }
                 
-                if($red_topla == 1){ $red_pu = '<i class="bi bi-1-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);"></i>';   
-                }else if($red_topla == 2){ $red_pu = '<i class="bi bi-2-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);"></i>';   
-                }else if($red_topla == 3){ $red_pu = '<i class="bi bi-3-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);"></i>';   
-                }else if($red_topla == 4){ $red_pu = '<i class="bi bi-4-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);"></i>';   
+                if($red_topla == 1){ $red_pu = '<i class="bi bi-1-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);">1</i>';   
+                }else if($red_topla == 2){ $red_pu = '<i class="bi bi-2-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);">2</i>';   
+                }else if($red_topla == 3){ $red_pu = '<i class="bi bi-3-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);">3</i>';   
+                }else if($red_topla == 4){ $red_pu = '<i class="bi bi-4-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(189, 4, 4);">4</i>';   
                 }else{$red_pu = "";}
 
-                if($blue_topla == 1){ $blue_pu = '<i class="bi bi-1-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);"></i>';   
-                }else if($blue_topla == 2){ $blue_pu = '<i class="bi bi-2-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);"></i>';   
-                }else if($blue_topla == 3){ $blue_pu = '<i class="bi bi-3-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);"></i>';   
-                }else if($blue_topla == 4){ $blue_pu = '<i class="bi bi-4-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);"></i>';   
+                if($blue_topla == 1){ $blue_pu = '<i class="bi bi-1-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);">1</i>';   
+                }else if($blue_topla == 2){ $blue_pu = '<i class="bi bi-2-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);">2</i>';   
+                }else if($blue_topla == 3){ $blue_pu = '<i class="bi bi-3-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);">3</i>';   
+                }else if($blue_topla == 4){ $blue_pu = '<i class="bi bi-4-circle-fill ref" id="'.$skr->fa_mus_skor_id.'" style="font-size:1.3em; cursor:help; color:rgb(16, 5, 179);">4</i>';   
                 }else{$blue_pu = "";}
 
                 
