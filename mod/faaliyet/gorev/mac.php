@@ -250,10 +250,22 @@
 <?php
 	$ac = 1;
 	// GÜVENLİK YAPILACAK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	$mac_atlat 	= 1;
-	$mac_oynat	= 1;
-	$mac_plan	= 1;
-	// GÜVENLİK YAPILACAK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if($fag['mac'] == 1)
+	{
+        $mac_plan	= 1;        
+        $mac_atlat 	= 1;
+        $mac_oynat	= 1;
+        $mac_geri	= 0;
+        $mac_ileri	= 0;
+    }
+	else if($modal == 1)
+	{
+        $mac_plan	= 0;        
+        $mac_atlat 	= 0;
+        $mac_oynat	= 0;
+        $mac_geri	= 0;
+        $mac_ileri	= 0;
+	}
 
 	if($_GET[gn] == "son"){
 		$d_krt = " AND d = 1 AND tur = 0 ";
