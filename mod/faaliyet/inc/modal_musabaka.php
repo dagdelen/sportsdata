@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
     include("mod/faaliyet/inc/modal_mus_post.php");
 }else if($_POST[id])
@@ -146,12 +146,16 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
         .yan2{margin-left: 175px;}
         .orta{margin-left: 175px; } /* margin-top: -40px; */ 
         .juri{ display: inline-block;}
+        .arti_bolum,.eksi_bolum,.atlat_bolum{display:none;}
 
     </style>
     <?php
+
+      if($test == 1){echo"TEST! TEST! TEST!";}
+
     // overflow:hidden; ruby-overhang:!important; font-size:0.9em;
     $fid 		= $k_ne; 
-    // $fa_mus_id = $id;
+    // $fa_mus_id = $id; 
     //	 echo"m_ne:$m_ne t_ne:$t_ne k_ne:$k_ne id:$id ";
 	$faaliyetsqll = DB::prepare("SELECT * FROM faaliyet WHERE faaliyet_id = ? ");
 	$faaliyetsqll->execute(array($fid));
@@ -178,14 +182,31 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
     ?>	
     <!--  
 	<a class="float-end" href="java.php?f=<?=$fid?>&r=<?=$ring_id?>" target="_blank" style="position:absolute; right:10px; top:10px;">
-    -->   
-	<a  style="cursor:cell; font-size:1.5em; position:absolute; right:10px; top:10px;" onclick="window.open('ajx.php?f=<?=$fid?>&r=<?=$ring_id?>','skor<?=$ring_id?>','height=400,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+    --> 
+   <!--  
+ 	<a  style="cursor:cell; font-size:1em; position:absolute; right:250px; top:10px;" 
+    onclick="window.open('http://<?=$_SERVER[SERVER_NAME]?>/ajx.php?qf=<?=$fid?>&qr=<?=$ring_id?>&fmi=<?=$mus_id?>&ran=<?=$akt_mus[ran]?>','test<?=$ring_id?>','height=500,width=350,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+		Desisyon TEST
+	</a>  	
+ 
+    <a  style="cursor:cell; font-size:1.5em; position:absolute; right:50px; top:10px;" 
+    onclick="window.open('ajx.php?qf=<?=$fid?>&qr=<?=$ring_id?>&fmi=<?=$mus_id?>&u=<?=$uye?>','qr<?=$ring_id?>','height=800,width=800,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+		<i class="bi bi-qr-code-scan"></i>
+	</a>   
+
+	<a  style="cursor:cell; font-size:1.5em; position:absolute; right:10px; top:10px;" 
+    onclick="window.open('ajx.php?f=<?=$fid?>&r=<?=$ring_id?>','skor<?=$ring_id?>','height=400,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
 		<i class="md_bi bi bi-display"></i>
 	</a>
-    <!-- --> 
+
+    --> 
+
+            <div class="artir_<?=$mus[fa_mus_id]?>" style="position:absolute;"></div>
+            <div class="eksilt_<?=$mus[fa_mus_id]?>" style="position:absolute;"></div>
+            <div class="atlat_<?=$mus[fa_mus_id]?>" style="position:absolute;"></div> 
 
     <div align="center" style="padding-left: 50px;">
-        <table border="0" width="100%" id="tableana" cellpadding="4">
+        <table border="0" width="100%" id="tableana" cellpadding="4"  style="">
             <tr>
                 <td width="50%" height="100%">
 
@@ -230,12 +251,13 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                             </td>
                             <td>
                                 <!-- -->   
-                            <iframe src="mod/faaliyet/musabaka/skor.php?f=<?=$fid?>&r=<?=$ring_id?>&m=<?=$mus_id?>&md=1" scrolling="no" width="500" height="300"></iframe> 
-                                     
-                        <?php  
-                           // $modal = 1;
-                          //  include("mod/faaliyet/musabaka/skor.php");
-                        ?>       
+                                <iframe src="mod/faaliyet/musabaka/skor.php?f=<?=$fid?>&r=<?=$ring_id?>&m=<?=$mus_id?>&md=1" scrolling="no" width="500" height="300"></iframe> 
+                                   
+
+                                    <?php  
+                                    // $modal = 1;
+                                    //  include("mod/faaliyet/musabaka/skor.php");
+                                    ?>       
                                     <?php
                                     $orthksql = DB::prepare("SELECT uy.ad,uy.soyad
                                     FROM fa_mus_gorev AS fmg 
@@ -248,6 +270,32 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                                 <div class="clearfix">
                                     <div class="orta hkm ;" align="center"><?=$ort[ad]?> <?=$ort[soyad]?></div>
                                 </div>
+
+                                    <div class="aktif_zaman">
+                                        <table width="100%"  border="1">
+                                            <tr>
+                                                <td class="aktif_raund">
+                                                    <span class="tex" id="<?=$akt_mus[fa_mus_aktif_id]?>" t="fa_mus_aktif" o="raund" s=""><?=$akt_mus[raund]?></span> <?=_Raund?>                                         
+                                                </td>
+                                                <td class="aktif_sure">
+                                                    <span class="tex" id="<?=$akt_mus[fa_mus_aktif_id]?>" t="fa_mus_aktif" o="sure" s=""><?=$akt_mus[sure]?></span> sn,
+                                                </td>
+                                                <td class="aktif_mola">
+                                                    <span class="tex" id="<?=$akt_mus[fa_mus_aktif_id]?>" t="fa_mus_aktif" o="mola" s=""><?=$akt_mus[mola]?></span> sn <?=_Mola?>,
+                                                </td>
+                                                <td class="aktif_ara">
+                                                    <span class="tex" id="<?=$akt_mus[fa_mus_aktif_id]?>" t="fa_mus_aktif" o="ara" s=""> - <?=$akt_mus[ara]?> - </span>
+                                                </td>
+
+                                                <td class="aktif_kro">
+                                                    <span class="tex" id="<?=$akt_mus[fa_mus_aktif_id]?>" t="fa_mus_aktif" o="kro" s=""> > <?=$akt_mus[kro]?> < </span>
+                                                </td>                                                  
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+
 
 
                                         <?php
@@ -263,51 +311,65 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                                         <div class="juri hkm m-2" align="center"><?=$hjr->ad?> <?=$hjr->soyad?> </div>
                                         <?php
                                     }
+                                    //  
                                         ?>
 
-                                <div align="center" style="height:80px;">
+                                <div align="center" style="height:50px;">
 
-                                    <table class="arti_bolum" width="100%" style="display:none;">
+
+
+
+
+                                    <table width="100%"  border="1" style="">
                                         <tr>
-                                            <td>
-                                                <i class="bi bi-arrow-up-square-fill kirmizi artir" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell;"></i>
+                                            <td width="10%" align="center">  
+                                                <i class="bi bi-arrow-up-square-fill kirmizi artir arti_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Arti?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell;"></i>          
                                             </td>
-                                            <td class="artir_<?=$mus[fa_mus_id]?>"></td>
-                                            <td>
-                                                <i class="bi bi-arrow-up-square-fill mavi artir" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell; float:right;"></i>
+                                            <td width="10%" align="center">
+                                                <i class="bi bi-arrow-down-square-fill kirmizi eksilt eksi_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Eksi?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell;"></i>            
+                                            </td>
+                                            <td width="10%" align="center">
+                                                <i class="md_bi bi bi-trophy-fill kirmizi mus_atlat atlat_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell;"></i>               
+                                            </td>
+
+
+                                            <td width="10%" align="center">
+                                                <a  style="cursor:cell; font-size:1.5em;" 
+                                                onclick="window.open('ajx.php?f=<?=$fid?>&r=<?=$ring_id?>','skor<?=$ring_id?>','height=400,width=600,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+                                                    <i class="md_bi bi bi-display"></i>
+                                                </a>               
+                                            </td>
+                                            <td width="10%" align="center">
+                                                <a  style="cursor:cell; font-size:1.5em;" 
+                                                onclick="window.open('http://<?=$_SERVER[SERVER_NAME]?>/ajx.php?qf=<?=$fid?>&qr=<?=$ring_id?>&fmi=<?=$mus_id?>&ran=<?=$akt_mus[ran]?>','test<?=$ring_id?>','height=400,width=200,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+                                                    <i class="bi bi-phone-fill"></i>
+                                                </a> 
+                                            </td>                                         
+                                            <td width="10%" align="center">
+                                                <a  style="cursor:cell; font-size:1.5em;" 
+                                                onclick="window.open('ajx.php?qf=<?=$fid?>&qr=<?=$ring_id?>&fmi=<?=$mus_id?>&u=<?=$uye?>','qr<?=$ring_id?>','height=800,width=800,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=no');">
+                                                    <i class="bi bi-qr-code-scan"></i>
+                                                </a>                                             
+                                            </td>
+
+
+                                            <td width="10%" align="center">
+                                                <i class="md_bi bi bi-trophy-fill mavi mus_atlat atlat_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell; float:right;"></i>
+                                            </td>
+                                            <td width="10%" align="center">
+                                                <i class="bi bi-arrow-down-square-fill mavi eksilt eksi_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Eksi?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell; float:right;"></i>
+                                            </td>
+                                            <td width="10%" align="center">
+                                                <i class="bi bi-arrow-up-square-fill mavi artir arti_bolum" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
+                                                data-bs-toggle="tooltip" data-bs-title="<?=_Arti?> <?=$mus[fa_mus_id]?>" style="font-size:2em; cursor:cell; float:right;"></i>
                                             </td>
                                         </tr>
                                     </table> 
-
-                                    <table class="atlat_bolum" width="100%" style="display:none;">
-                                        <tr>
-                                            <td>
-                                                <i class="md_bi bi bi-trophy-fill kirmizi mus_atlat" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell;"></i>
-                                            </td>
-                                            <td class="atlat_<?=$mus[fa_mus_id]?>"></td>
-                                            <td>
-                                                <i class="md_bi bi bi-trophy-fill mavi mus_atlat" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell; float:right;"></i>
-                                            </td>
-                                        </tr>
-                                    </table>                                       
-                                    
-                                    <table class="eksi_bolum" width="100%" style="display:none;">
-                                        <tr>
-                                            <td>
-                                                <i class="bi bi-arrow-down-square-fill kirmizi eksilt" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="red"  
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell;"></i>
-                                            </td>
-                                            <td class="eksilt_<?=$mus[fa_mus_id]?>"></td>
-                                            <td>
-                                                <i class="bi bi-arrow-down-square-fill mavi eksilt" id="<?=$mus[fa_mus_id]?>" fid="<?=$fid?>" ks="blue" 
-                                                data-bs-toggle="tooltip" data-bs-title="<?=_Musabakayi_Kazandi?> <?=$mus[fa_mus_id]?>" style="cursor:cell; float:right;"></i>
-                                            </td>
-                                        </tr>
-                                    </table>                                
 
                                 </div>
 
@@ -330,7 +392,7 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                         </tr>
                             	
 
-                            <tr>
+                        <tr>
                                 <td>&nbsp;</td>
                                 <td valign="middle">
                                 
@@ -342,24 +404,24 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                         {
                             ?>
                         
-                            <!-- kontrol panel   -->
-                            <div class="col-lg-12" style="">
+                            <!-- kontrol panel      top:-6px;   top:-6px;  -->
+                            <div class="col-lg-12" style="padding: 0; margin: 0;">
                                 <div class="card p-1">
                                 <div class="card-body p-0 clearfix" style="text-align:center;"> 
 
-                                <i class="md_bi bi bi-play-btn-fill yonet basla float-start " id="<?=$akt_mus[id]?>" fid="<?=$fid?>" mus_id="<?=$id?>" ring_id="<?=$ring_id?>" poz="1" ne="poz"
-                                style=" position:absolute; left:3px; top:-6px; font-size:2em; <?php if($mus_aktif_say > 0 && $akt_mus[mid] != $mus_id){?>display:none; <?php }?> "></i>
+                                <i class="md_bi bi bi-play-circle-fill yonet basla float-start " id="<?=$akt_mus[id]?>" fid="<?=$fid?>" mus_id="<?=$id?>" ring_id="<?=$ring_id?>" poz="1" ne="poz"
+                                style=" position:absolute; left:3px; font-size:2.2em; <?php if($mus_aktif_say > 0 && $akt_mus[mid] != $mus_id){?>display:none; <?php }?> "></i>
                                 
-                                <i class="md_bi bi bi-pause-btn-fill yonet mola float-start " id="<?=$akt_mus[id]?>" fid="<?=$fid?>" mus_id="<?=$id?>" ring_id="<?=$ring_id?>" poz="2" ne="poz" 
-                                style=" position:absolute; left:50px; top:-6px; font-size:2em; <?php if($mus_aktif_say > 0 && $akt_mus[mid] != $mus_id){?> display:none; <?php }?> "></i>
+                                <i class="md_bi bi bi-pause-circle-fill yonet mola float-start " id="<?=$akt_mus[id]?>" fid="<?=$fid?>" mus_id="<?=$id?>" ring_id="<?=$ring_id?>" poz="2" ne="poz" 
+                                style=" position:absolute; left:50px; font-size:2.2em; <?php if($mus_aktif_say > 0 && $akt_mus[mid] != $mus_id){?> display:none; <?php }?> "></i>
 
 
                                 <i class="md_bi m-2 bi bi-volume-up-fill gong"></i>        
 
                                 <span class="arti_eksi_bit" style=" <?php if($mus_aktif_say > 0 && $akt_mus[mid] != $mus_id){?>display:none; <?php }?>">                                              
-                                    <i class="md_bi bi bi-plus-circle-fill arti" style="font-size:1.2em; cursor:cell;"></i>
-                                    <i class="md_bi bi bi-trophy-fill m-2 bitir" style="font-size:1.2em; cursor:cell;"></i>
-                                    <i class="md_bi bi bi-dash-circle-fill eksi" style="font-size:1.2em; cursor:cell;"></i>  
+                                    <i class="md_bi bi bi-plus-circle-fill arti" style="font-size:2em; cursor:cell;"></i>
+                                    <i class="md_bi bi bi-trophy-fill m-2 bitir" style="font-size:2em; cursor:cell;"></i>
+                                    <i class="md_bi bi bi-dash-circle-fill eksi" style="font-size:2em; cursor:cell;"></i>  
                                 </span>
                                                                            
                         
@@ -391,13 +453,13 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                             
                                 </td>
                                 <td>&nbsp;</td>
-                            </tr>
+                        </tr>
 
                     </table>                    
 
 
                 </td>
-                <td width="40%" height="100%">
+                <td width="50%" height="100%">
                     
                 <iframe src="mod/faaliyet/musabaka/skor_rapor.php?f=<?=$fid?>&r=<?=$ring_id?>&m=<?=$mus_id?>&md=1" scrolling="yes" width="100%" height="400"></iframe> 
                             
@@ -447,20 +509,30 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                                     $Gtms_yer_ad = "$Gtms[$Gtms_adne]";                            
                                 }
                                 ?>
-                                <div class="mgs_ mgs_<?=$mgor->fa_gorevli_id?>" data-bs-toggle="tooltip" data-bs-title="ad soyad">
+                                <div class="mgs_ mgs_<?=$mgor->fa_gorevli_id?> satir_fa_mus_gorev_<?=$mgor->fa_mus_gorev_id?>" data-bs-toggle="tooltip" data-bs-title="ad soyad">
+
+                                
                                     <img src="<?=$uye_resim?>" 
                                     class="z-3 img-fluid mus_gorevli_sec" t="fa_gorevli" k="kont" ring="<?=$mgor->ring?>" id="<?=$mgor->fa_gorevli_id?>" fid="<?=$fid?>"  
-                                        alt="" style="max-height:70px;" />
+                                        alt="" style="max-height:60px;" />
+
 
                                         <div class="p-0 m-0" style="font-size:0.6em; color: #000000"> 
                                             <div><?=mb_substr($uy[ad],0,10, 'UTF-8')?></div>
                                             <div><?=mb_substr($uy[soyad],0,10, 'UTF-8')?></div>
                                             <div><?=mb_substr($Gtms_yer_ad,0,10, 'UTF-8')?></div>  
+            <?php if($uyesqlli->rowCount() == 0){?>
+                <i class="bi bi-trash3-fill float-end sil"
+                    t="fa_mus_gorev" k="fa_mus_gorev_id" mod="<?=$_GET[mod]?>" m="<?=$_GET[m]?>" id="<?=$mgor->fa_mus_gorev_id?>" e="<?=$_GET[e]?>" cf="<?=_eminmisin?>!" rl="0" wo="0" 
+                    style="color:#F00; font-size:1em;"></i>
+                <span class="sil_fa_mus_gorev_fa_mus_gorev_id_<?=$_GET[mod]?>_<?=$_GET[m]?>_<?=$mgor->fa_mus_gorev_id?> z-3" style="position:absolute;"></span>
+            <?php } ?>                
+
                                         </div>
         
                                         <select class="form-select input_edt_str p-0 m-0" 
                                             t="fa_mus_gorev" k="yer" id="<?=$mgor->fa_mus_gorev_id?>" ex="" 
-                                            aria-label="Default select example" style="font-size:0.8em; width: 80px;">
+                                            aria-label="Default select example" style="font-size:0.8em; width: 65px;">
                                             <option value="0"><?=_sec?></option>
                                             <option value="1" <?php if($mgor->yer == 1){?> selected<?php }?>>1.<?=_yan?></option>
                                             <option value="2" <?php if($mgor->yer == 2){?> selected<?php }?>>2.<?=_yan?></option>
@@ -476,8 +548,19 @@ if($_POST[yonet_modal] || $_POST[artir] || $_POST[eksilt]){
                                                                             
                                     
                                     <span class="gorev_fa_gorevli_kont_<?=$fid?>_<?=$mgor->fa_gorevli_id?>" style="position:absolute;"></span>  
-                                </div>    
+
+
+                               
+
+
+                                </div>   
+                                
+                               
+
                                 <?php
+                              
+
+
                                 }
                             ?>
                         </div>   
