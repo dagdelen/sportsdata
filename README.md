@@ -1,2 +1,2 @@
 # sportsdata
-spor verileri
+localhost ta müsabaka yönetimi
